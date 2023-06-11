@@ -6,3 +6,11 @@
   margin: 0;
   padding: 0;
 }
+
+*::-webkit-scrollbar {
+  @apply w-3 bg-dark;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-soft-dark;
+}
