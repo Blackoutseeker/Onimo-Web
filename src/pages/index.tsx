@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import RoomsContainer from '@/components/RoomsContainer'
 
 const Home: NextPage = () => {
   return (
@@ -7,7 +8,9 @@ const Home: NextPage = () => {
       <Head>
         <title>Onimo</title>
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
+      <main className="flex items-center justify-center min-h-screen">
+        <RoomsContainer />
+      </main>
     </>
   )
 }
