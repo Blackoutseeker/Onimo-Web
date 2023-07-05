@@ -12,7 +12,7 @@ const Home: NextPage = () => {
           content="Onimo é um chat anônimo, onde você pode criar salas de chat públicas ou privadas."
         />
       </Head>
-      <main className="flex items-center justify-center min-h-screen">
+      <main className="flex min-h-screen items-center justify-center">
         <RoomsContainer />
       </main>
     </>

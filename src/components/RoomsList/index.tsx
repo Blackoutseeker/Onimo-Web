@@ -9,9 +9,9 @@ interface RoomItemProps {
 const RoomItem: FC<RoomItemProps> = ({ room }) => {
   return (
     <li>
-      <button className="flex items-center w-full px-10 py-5 space-x-5 duration-150 hover:bg-soft-dark">
-        <h4 className="w-full font-bold text-left text-white">{room.name}</h4>
-        <h5 className="text-sm text-left text-white">
+      <button className="flex w-full items-center space-x-5 px-10 py-5 duration-150 hover:bg-soft-dark">
+        <h4 className="w-full text-left font-bold text-white">{room.name}</h4>
+        <h5 className="text-left text-sm text-white">
           {room.activeUsers.length}/5
         </h5>
         <div>
@@ -31,8 +31,8 @@ const RoomsList: FC = () => {
 
   if (rooms.length === 0)
     return (
-      <div className="flex items-center justify-center flex-1 px-10 py-5">
-        <p className="text-sm text-center text-soft-gray">
+      <div className="flex flex-1 items-center justify-center px-10 py-5">
+        <p className="text-center text-sm text-soft-gray">
           Nenhuma sala pública disponível no momento. Sinta-se livre para criar
           uma nova.
         </p>
