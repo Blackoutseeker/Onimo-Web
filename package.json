@@ -10,7 +10,10 @@
     "lint": "next lint",
     "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
     "prettier:check": "prettier --check \"**/*.{js,jsx,ts,tsx,css}\"",
-    "prettier:format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\""
+    "prettier:format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
+    "jest": "jest",
+    "jest:watch": "jest --watch",
+    "jest:clear": "jest --clearCache"
   },
   "dependencies": {
     "next": "^13.4.8",
