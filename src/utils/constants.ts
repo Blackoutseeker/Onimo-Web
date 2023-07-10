@@ -18,3 +18,36 @@ export const information: string[] = [
   'Quando todos os usuários de uma sala privada se desconectam, ela será excluída automaticamente.',
   'Todas as salas e mensagens são deletadas automaticamente às 00:00h diariamente.'
 ]
+
+export const nicknames: string[] = [
+  'pixel_art',
+  'byte_code',
+  'hacker_ninja',
+  'cyber_shadow',
+  'grey_hat',
+  'robot_warrior',
+  'web_master',
+  'cmd_hacker',
+  'byte_hacker',
+  'john_doe',
+  'pixel_ninja',
+  'code_hunter',
+  'tech_master',
+  'windows_lover',
+  'metal_head',
+  'white_hat',
+  'data_genius',
+  'mr_coder',
+  'noob_lammer',
+  'byte_king',
+  'pixel_coder',
+  'tech_dragon',
+  'blank_code',
+  'linux_lover',
+  'script_kiddie',
+  'hacker_owl',
+  'black_hat',
+  'mr_robot',
+  'data_seeker',
+  'kali_linux'
+]
