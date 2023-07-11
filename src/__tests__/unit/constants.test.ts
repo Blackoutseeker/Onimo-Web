@@ -6,9 +6,7 @@ const checkDuplication = (list: string[]): boolean => {
       itemFromFilter => itemFromFilter.toLowerCase() === item.toLowerCase()
     ).length
 
-    if (duplicationOccurrences > 1) {
-      return true
-    }
+    if (duplicationOccurrences > 1) return true
   }
 
   return false
