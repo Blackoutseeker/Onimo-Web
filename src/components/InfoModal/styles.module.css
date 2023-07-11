@@ -1,0 +1,7 @@
+.infoModal::-webkit-scrollbar {
+  @apply w-2 rounded-r-md bg-dark;
+}
+
+.infoModal::-webkit-scrollbar-thumb {
+  @apply rounded-r-md bg-accent;
+}
