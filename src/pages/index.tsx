@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import RoomsContainer from '@/components/RoomsContainer'
+import ChatContainer from '@/components/ChatContainer'
 
 const Home: NextPage = () => {
   return (
@@ -13,7 +14,10 @@ const Home: NextPage = () => {
         />
       </Head>
       <main className="flex min-h-screen items-center justify-center">
-        <RoomsContainer />
+        <div className="flex w-3/5">
+          <RoomsContainer />
+          <ChatContainer />
+        </div>
       </main>
     </>
   )
