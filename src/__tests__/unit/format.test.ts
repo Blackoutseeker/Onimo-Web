@@ -6,4 +6,10 @@ describe('Testing methods of the "format" module', () => {
     const result = formatTime(date)
     expect(result).toBe('15:05')
   })
+
+  test('"formatTime" must return the formatted time correctly', () => {
+    const dateString = '2023-07-15T08:30:00'
+    const result = formatTime(dateString)
+    expect(result).toBe('08:30')
+  })
 })
