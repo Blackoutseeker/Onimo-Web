@@ -1,4 +1,4 @@
-import { generateId } from '@/utils/generate'
+import { generateId, generateNickname } from '@/utils/generate'
 
 const checkIfRespectRegex = (text: string, regex: RegExp): boolean => {
   const matchRegex: boolean = RegExp(regex.source).test(text)
@@ -6,6 +6,8 @@ const checkIfRespectRegex = (text: string, regex: RegExp): boolean => {
 }
 
 const idRegex: RegExp = /^[a-zA-Z0-9]+$/g
+
+const nicknameRegex: RegExp = /^[a-z]+_[a-z]+[1-9]$/g
 
 describe('Testing methods of the "generate" module', () => {
   test('"generateId" must not return an empty string', () => {
@@ -21,5 +23,9 @@ describe('Testing methods of the "generate" module', () => {
 
   test(`ID must respect the ${idRegex.source} regex`, () => {
     expect(checkIfRespectRegex(generateId(), idRegex)).toBeTruthy()
+  })
+
+  test(`The nickname generated must respect the ${nicknameRegex.source} regex`, () => {
+    expect(checkIfRespectRegex(generateNickname(), nicknameRegex)).toBeTruthy()
   })
 })
