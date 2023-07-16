@@ -10,6 +10,11 @@ const Footer: FC = () => {
 
   const submitMessage = async (event: FormEvent) => {
     event.preventDefault()
+    setMessage('')
+    const chatList = document.getElementById('chat-list')
+    if (chatList) {
+      chatList.scrollTop = chatList.scrollHeight
+    }
   }
 
   return (
