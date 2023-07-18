@@ -1,4 +1,5 @@
-import { FirebaseOptions, getApps, initializeApp } from 'firebase/app'
+import { FirebaseOptions, getApps, initializeApp, getApp } from 'firebase/app'
+import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check'
 import { getDatabase } from 'firebase/database'
 
 const firebaseOptions: FirebaseOptions = {
@@ -16,6 +17,18 @@ const firebaseAppIsNotInitialized: boolean = !getApps().length
 
 if (firebaseAppIsNotInitialized) {
   initializeApp(firebaseOptions)
+}
+
+export const initializeFirebaseAppCheck = () => {
+  if (process.env.NODE_ENV !== 'production' || process.env.IS_TESTING_FROM_CI) {
+    self.FIREBASE_APP_CHECK_DEBUG_TOKEN =
+      process.env.FIREBASE_APP_CHECK_DEBUG_TOKEN
+  }
+
+  initializeAppCheck(getApp(), {
+    provider: new ReCaptchaV3Provider(process.env.RECAPTCHA_SITE_KEY),
+    isTokenAutoRefreshEnabled: true
+  })
 }
 
 export const firebaseDatabase = getDatabase()
