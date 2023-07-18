@@ -16,4 +16,8 @@ export declare global {
       IS_TESTING_FROM_CI: boolean
     }
   }
+
+  interface Window {
+    FIREBASE_APP_CHECK_DEBUG_TOKEN: string | undefined
+  }
 }
