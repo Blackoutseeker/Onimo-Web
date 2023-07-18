@@ -1,4 +1,4 @@
-type ActiveUser = {
+export type ActiveUser = {
   id: string
   status: string
 }
@@ -6,5 +6,5 @@ type ActiveUser = {
 export type Room = {
   id: string
   name: string
-  activeUsers: ActiveUser[]
+  active_users?: ActiveUser[]
 }
