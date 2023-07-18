@@ -25,6 +25,12 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.config.mjs"],
+  "include": [
+    "next-env.d.ts",
+    "src/@types/env-vars.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "jest.config.mjs"
+  ],
   "exclude": ["node_modules"]
 }
