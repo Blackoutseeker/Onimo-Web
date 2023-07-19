@@ -14,6 +14,7 @@ const checkDuplication = (list: string[]): boolean => {
 
 const checkIfRespectRegex = (list: string[], regex: RegExp): boolean => {
   for (const item of list) {
+    expect(item).toMatch(regex)
     const notMatchRegex: boolean = !RegExp(regex.source).test(item)
     if (notMatchRegex) return false
   }
