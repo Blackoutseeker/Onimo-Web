@@ -14,7 +14,9 @@ const nextConfig = {
 
     RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
 
-    IS_TESTING_FROM_CI: process.env.IS_TESTING_FROM_CI
+    IS_TESTING_FROM_CI: process.env.IS_TESTING_FROM_CI,
+
+    JWT_SECRET_KEY: process.env.JWT_SECRET_KEY
   }
 }
 
