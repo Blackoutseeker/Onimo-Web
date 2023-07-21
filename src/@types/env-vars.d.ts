@@ -14,6 +14,8 @@ export declare global {
       RECAPTCHA_SITE_KEY: string
 
       IS_TESTING_FROM_CI: boolean
+
+      JWT_SECRET_KEY: string
     }
   }
 
