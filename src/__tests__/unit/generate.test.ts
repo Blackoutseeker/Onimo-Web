@@ -32,4 +32,12 @@ describe('Testing methods of the "generate" module', () => {
     const currentDate = new Date()
     expect(expirationDate.getTime()).toBeGreaterThan(currentDate.getTime())
   })
+
+  test('"getExpirationDate" must return a date with the hours, minutes, seconds, and milliseconds set to zero', () => {
+    const expirationDate = generateExpirationDate()
+    expect(expirationDate.getHours()).toBe(0)
+    expect(expirationDate.getMinutes()).toBe(0)
+    expect(expirationDate.getSeconds()).toBe(0)
+    expect(expirationDate.getMilliseconds()).toBe(0)
+  })
 })
