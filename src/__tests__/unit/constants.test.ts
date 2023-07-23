@@ -1,4 +1,4 @@
-import { rules, information, nicknames } from '@/utils/constants'
+import { rules, information, nicknames, nicknameRegex } from '@/utils/constants'
 
 const checkDuplication = (list: string[]): boolean => {
   for (const item of list) {
@@ -22,8 +22,6 @@ const checkIfRespectRegex = (list: string[], regex: RegExp): boolean => {
   return true
 }
 
-const nicknamesRegex: RegExp = /^[a-z]+_[a-z]+$/g
-
 describe('Constants', () => {
   test('Constants must not be empty', () => {
     expect(rules.length).toBeGreaterThan(0)
@@ -37,7 +35,7 @@ describe('Constants', () => {
     expect(checkDuplication(nicknames)).toBeFalsy()
   })
 
-  test(`Nicknames must respect the ${nicknamesRegex.source} regex`, () => {
-    expect(checkIfRespectRegex(nicknames, nicknamesRegex)).toBeTruthy()
+  test(`Nicknames must respect the ${nicknameRegex.source} regex`, () => {
+    expect(checkIfRespectRegex(nicknames, nicknameRegex)).toBeTruthy()
   })
 })

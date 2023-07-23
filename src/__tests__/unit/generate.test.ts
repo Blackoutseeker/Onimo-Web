@@ -1,8 +1,5 @@
 import { generateId, generateNickname } from '@/utils/generate'
-
-const idRegex: RegExp = /^[a-zA-Z0-9]+$/g
-
-const nicknameRegex: RegExp = /^[a-z]+_[a-z]+[1-9]$/g
+import { idRegex, generatedNicknameRegex } from '@/utils/constants'
 
 describe('Testing methods of the "generate" module', () => {
   test('"generateId" must not return an empty string', () => {
@@ -21,8 +18,8 @@ describe('Testing methods of the "generate" module', () => {
     expect(id).toMatch(idRegex)
   })
 
-  test(`The nickname generated must respect the ${nicknameRegex.source} regex`, () => {
+  test(`The nickname generated must respect the ${generatedNicknameRegex.source} regex`, () => {
     const nickname = generateNickname()
-    expect(nickname).toMatch(nicknameRegex)
+    expect(nickname).toMatch(generatedNicknameRegex)
   })
 })
