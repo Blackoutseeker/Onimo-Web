@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { initializeFirebaseAppCheck } from '@/utils/firebase'
 import { Provider as ReduxProvider } from 'react-redux'
 import { store } from '@/services/store'
+import UserProvider from '@/components/UserProvider'
 
 const roboto = Roboto({
   weight: ['300', '500', '700'],
@@ -18,9 +19,11 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ReduxProvider store={store}>
-      <main className={roboto.className}>
-        <Component {...pageProps} />
-      </main>
+      <UserProvider>
+        <main className={roboto.className}>
+          <Component {...pageProps} />
+        </main>
+      </UserProvider>
     </ReduxProvider>
   )
 }
