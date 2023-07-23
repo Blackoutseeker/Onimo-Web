@@ -1,4 +1,5 @@
 import { nicknames } from './constants'
+import type { User } from '@/entities/user'
 
 const chars = Array.from(Array(26), (_, i) => String.fromCharCode(65 + i))
   .concat(Array.from(Array(26), (_, i) => String.fromCharCode(97 + i)))
@@ -22,4 +23,11 @@ export const generateNickname = (): string => {
   const randomDigit = Math.floor(Math.random() * 9) + 1
   randomNickname += randomDigit
   return randomNickname
+}
+
+export const generateUser = (): User => {
+  return {
+    id: generateId(),
+    nickname: generateNickname()
+  }
 }
