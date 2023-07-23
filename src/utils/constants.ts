@@ -51,3 +51,7 @@ export const nicknames: string[] = [
   'data_seeker',
   'kali_linux'
 ]
+
+export const idRegex: RegExp = /^[a-zA-Z0-9]+$/g
+export const nicknameRegex: RegExp = /^[a-z]+_[a-z]+$/g
+export const generatedNicknameRegex: RegExp = /^[a-z]+_[a-z]+[1-9]$/g
