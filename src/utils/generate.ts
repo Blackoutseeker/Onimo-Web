@@ -31,3 +31,10 @@ export const generateUser = (): User => {
     nickname: generateNickname()
   }
 }
+
+export const generateExpirationDate = (): Date => {
+  const expirationDate = new Date()
+  expirationDate.setDate(expirationDate.getDate() + 1)
+  expirationDate.setHours(0, 0, 0, 0)
+  return expirationDate
+}
