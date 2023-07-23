@@ -1,4 +1,8 @@
-import { generateId, generateNickname } from '@/utils/generate'
+import {
+  generateId,
+  generateNickname,
+  generateExpirationDate
+} from '@/utils/generate'
 import { idRegex, generatedNicknameRegex } from '@/utils/constants'
 
 describe('Testing methods of the "generate" module', () => {
@@ -21,5 +25,11 @@ describe('Testing methods of the "generate" module', () => {
   test(`The nickname generated must respect the ${generatedNicknameRegex.source} regex`, () => {
     const nickname = generateNickname()
     expect(nickname).toMatch(generatedNicknameRegex)
+  })
+
+  test('"getExpirationDate" must return a date greater than the current date', () => {
+    const expirationDate = generateExpirationDate()
+    const currentDate = new Date()
+    expect(expirationDate.getTime()).toBeGreaterThan(currentDate.getTime())
   })
 })
