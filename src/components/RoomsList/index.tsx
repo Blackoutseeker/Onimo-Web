@@ -1,22 +1,25 @@
 import { FC, useState, useEffect, memo } from 'react'
 import type { Room } from '@/entities/room'
 import { BsFillPersonFill } from 'react-icons/bs'
-import { useAppDispatch } from '@/hooks/redux'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import { listenRooms } from '@/services/database/room'
 import { setCurrentRoom } from '@/services/store/ducks/room'
 
 interface RoomItemProps {
   room: Room
+  isCurrentRoom: boolean
   changeRoom: (room: Room) => void
 }
 
-const RoomItem: FC<RoomItemProps> = ({ room, changeRoom }) => {
+const RoomItem: FC<RoomItemProps> = ({ room, isCurrentRoom, changeRoom }) => {
   const handleChangeRoom = () => changeRoom(room)
 
   return (
     <li>
       <button
-        className="flex w-full items-center space-x-5 px-10 py-5 duration-150 hover:bg-soft-dark"
+        className={`flex w-full items-center space-x-5 px-10 py-5 duration-150 hover:bg-soft-dark ${
+          isCurrentRoom ? 'bg-soft-dark' : 'bg-transparent'
+        }`}
         onClick={handleChangeRoom}
       >
         <h4 className="w-full text-left font-bold text-white">{room.name}</h4>
@@ -35,6 +38,7 @@ const RoomItemMemoized = memo(RoomItem)
 
 const RoomsList: FC = () => {
   const dispatch = useAppDispatch()
+  const currentRoom = useAppSelector(state => state.room)
   const [rooms, setRooms] = useState<Room[]>([])
 
   useEffect(() => {
@@ -51,7 +55,12 @@ const RoomsList: FC = () => {
 
   const renderRoomItems = () =>
     rooms.map(room => (
-      <RoomItemMemoized key={room.id} room={room} changeRoom={changeRoom} />
+      <RoomItemMemoized
+        key={room.id}
+        room={room}
+        isCurrentRoom={currentRoom.id === room.id}
+        changeRoom={changeRoom}
+      />
     ))
 
   if (rooms.length === 0)
