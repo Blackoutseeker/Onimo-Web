@@ -8,6 +8,7 @@ import MessageCard from '../MessageCard'
 
 const Chat: FC = () => {
   const currentRoom = useAppSelector(state => state.room)
+  const user = useAppSelector(state => state.user)
   const [messages, setMessages] = useState<Message[]>([])
   const chatListRef = useRef<HTMLOListElement>(null)
 
@@ -33,7 +34,11 @@ const Chat: FC = () => {
 
   const renderMessages = () =>
     messagesSortedByMostRecent.map(message => (
-      <MessageCard key={message.send_timestamp} message={message} />
+      <MessageCard
+        key={message.send_timestamp}
+        message={message}
+        isMessageFromCurrentUser={user.id === message.sender_id}
+      />
     ))
 
   if (messages.length === 0) return <VoidChat />

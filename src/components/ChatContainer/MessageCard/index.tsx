@@ -4,11 +4,14 @@ import { formatTime } from '@/utils/format'
 
 interface MessageCardProps {
   message: Message
+  isMessageFromCurrentUser: boolean
 }
 
-const MessageCard: FC<MessageCardProps> = ({ message }) => {
+const MessageCard: FC<MessageCardProps> = ({
+  message,
+  isMessageFromCurrentUser
+}) => {
   const formattedTime = formatTime(message.send_timestamp)
-  const isMessageFromCurrentUser = message.sender_id === 'user_id_example'
 
   if (isMessageFromCurrentUser) {
     return (
