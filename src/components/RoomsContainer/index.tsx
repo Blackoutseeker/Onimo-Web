@@ -1,9 +1,11 @@
 import { FC, useRef } from 'react'
+import { useAppSelector } from '@/hooks/redux'
 import { AiOutlineInfoCircle, AiOutlinePlus } from 'react-icons/ai'
 import RoomsList from '../RoomsList'
 import InfoModal from '../InfoModal'
 
 const RoomsContainer: FC = () => {
+  const user = useAppSelector(state => state.user)
   const modalReference = useRef<HTMLDialogElement>(null)
 
   const showModal = () => {
@@ -20,7 +22,7 @@ const RoomsContainer: FC = () => {
           className="flex h-16 items-center justify-between 
           border-b-[1px] border-soft-dark px-10"
         >
-          <h3 className="text-xl font-bold text-white">john_doe7</h3>
+          <h3 className="text-xl font-bold text-white">{user.nickname}</h3>
           <button
             title="Informações"
             aria-label="Informações"
