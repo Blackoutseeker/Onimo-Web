@@ -1,6 +1,8 @@
 import { formatTime, formatSendTimestamp } from '@/utils/format'
 
 const timeRegex: RegExp = /^(0\d|1\d|2[0-3]):[0-5]\d$/g
+const timestampRegex: RegExp =
+  /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\d|3[0-1]) (0\d|1\d|2[0-3]):[0-5]\d:[0-5]\d$/g
 
 describe('Testing methods of the "format" module', () => {
   test('"formatTime" must pad with leading zeros when necessary', () => {
@@ -21,5 +23,10 @@ describe('Testing methods of the "format" module', () => {
     const date = new Date(dateString)
     const formattedDate = formatSendTimestamp(date)
     expect(formattedDate).toBe(dateString)
+  })
+
+  test(`"formatSendTimestamp" must respect ${timestampRegex.source} regex`, () => {
+    const formattedDate = formatSendTimestamp(new Date())
+    expect(formattedDate).toMatch(timestampRegex)
   })
 })
