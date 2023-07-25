@@ -7,8 +7,8 @@ interface MessageCardProps {
 }
 
 const MessageCard: FC<MessageCardProps> = ({ message }) => {
-  const formattedTime = formatTime(message.sendTimestamp)
-  const isMessageFromCurrentUser = message.senderId === 'user_id_example'
+  const formattedTime = formatTime(message.send_timestamp)
+  const isMessageFromCurrentUser = message.sender_id === 'user_id_example'
 
   if (isMessageFromCurrentUser) {
     return (
@@ -17,7 +17,7 @@ const MessageCard: FC<MessageCardProps> = ({ message }) => {
           className="ml-20 flex w-fit min-w-[340px] flex-col space-y-[14px] rounded-lg
           rounded-tr-none bg-soft-dark p-[14px] text-sm text-white"
         >
-          <p>{message.bodyText}</p>
+          <p>{message.body_text}</p>
           <p className="text-end">{formattedTime}</p>
         </div>
       </li>
@@ -30,9 +30,9 @@ const MessageCard: FC<MessageCardProps> = ({ message }) => {
       rounded-tl-none border-2 border-soft-dark p-[14px] text-sm text-soft-gray"
     >
       <h2 className="text-base font-bold text-white">
-        {message.senderNickname}
+        {message.sender_nickname}
       </h2>
-      <p>{message.bodyText}</p>
+      <p>{message.body_text}</p>
       <p className="text-end">{formattedTime}</p>
     </li>
   )
