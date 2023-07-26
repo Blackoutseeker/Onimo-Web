@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getUserFromToken } from '@/services/auth'
+import { getUserFromToken } from '@/services/auth/token'
 
 const handler = async (request: NextApiRequest, response: NextApiResponse) => {
   if (request.method !== 'GET') {

@@ -1,6 +1,6 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
-import { generateToken, getUserFromToken } from './services/auth'
+import { generateToken, getUserFromToken } from './services/auth/token'
 import { generateExpirationDate } from './utils/generate'
 
 export const middleware = async (request: NextRequest) => {
