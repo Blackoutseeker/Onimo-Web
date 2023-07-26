@@ -1,5 +1,6 @@
-import { FC, useState, FormEvent, ChangeEvent } from 'react'
+import { FC, useState, FormEvent, ChangeEvent, useEffect } from 'react'
 import { useAppSelector } from '@/hooks/redux'
+import { listenActiveUsers } from '@/services/database/room'
 import { FaUser } from 'react-icons/fa'
 
 export const RoomInput: FC = () => {
@@ -42,12 +43,24 @@ export const RoomInput: FC = () => {
 
 export const UserCounter: FC = () => {
   const currentRoom = useAppSelector(state => state.room)
-
-  return (
-    <p className="text-sm text-white">
-      {currentRoom.active_users?.length ?? 0}/5
-    </p>
+  const [userCounter, setUserCounter] = useState<number>(
+    currentRoom.active_users?.length ?? 0
   )
+
+  useEffect(() => {
+    if (currentRoom.id !== '') {
+      const handleActiveUsersListener = listenActiveUsers(
+        currentRoom.id,
+        setUserCounter
+      )
+      handleActiveUsersListener.on()
+      return () => {
+        handleActiveUsersListener.off()
+      }
+    }
+  }, [currentRoom.id])
+
+  return <p className="text-sm text-white">{userCounter}/5</p>
 }
 
 const Header: FC = () => {
