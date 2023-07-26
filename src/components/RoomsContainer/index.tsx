@@ -1,15 +1,25 @@
 import { FC, useRef } from 'react'
-import { useAppSelector } from '@/hooks/redux'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux'
+import { setPublicRoom } from '@/services/database/room'
+import { setCurrentRoom } from '@/services/store/ducks/room'
 import { AiOutlineInfoCircle, AiOutlinePlus } from 'react-icons/ai'
 import RoomsList from '../RoomsList'
 import InfoModal from '../InfoModal'
 
 const RoomsContainer: FC = () => {
+  const dispatch = useAppDispatch()
   const user = useAppSelector(state => state.user)
   const modalReference = useRef<HTMLDialogElement>(null)
 
   const showModal = () => {
     modalReference.current?.showModal()
+  }
+
+  const createPublicRoom = async () => {
+    const publicRoom = await setPublicRoom()
+    if (publicRoom) {
+      dispatch(setCurrentRoom(publicRoom))
+    }
   }
 
   return (
@@ -32,7 +42,10 @@ const RoomsContainer: FC = () => {
           </button>
         </header>
 
-        <button className="flex items-center space-x-5 px-10 py-5 duration-150 hover:bg-soft-dark">
+        <button
+          className="flex items-center space-x-5 px-10 py-5 duration-150 hover:bg-soft-dark"
+          onClick={createPublicRoom}
+        >
           <div>
             <AiOutlinePlus className="text-white" size={20} />
           </div>
