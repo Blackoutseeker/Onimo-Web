@@ -1,7 +1,8 @@
 import type { Room, ActiveUser } from '@/entities/room'
 import type { Listener } from '@/entities/listener'
 import { firebaseDatabase } from '@/utils/firebase'
-import { ref, onValue, off, get } from 'firebase/database'
+import { ref, onValue, off, get, set } from 'firebase/database'
+import { generateId } from '@/utils/generate'
 
 export const listenRooms = (setRooms: (rooms: Room[]) => void): Listener => {
   const roomsReference = ref(firebaseDatabase, 'available_rooms')
@@ -66,4 +67,21 @@ const getPublicRoomsLength = async (): Promise<number> => {
     }
   })
   return roomsLength
+}
+
+export const setPublicRoom = async (): Promise<Room | undefined> => {
+  const publicRoomsLength = await getPublicRoomsLength()
+  if (publicRoomsLength < 10) {
+    const publicRoom: Room = {
+      id: generateId(),
+      name: `Sala ${publicRoomsLength + 1}`
+    }
+    const roomReference = ref(
+      firebaseDatabase,
+      `available_rooms/${publicRoom.id}`
+    )
+    await set(roomReference, publicRoom)
+    return publicRoom
+  }
+  return undefined
 }
