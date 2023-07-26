@@ -1,7 +1,7 @@
 import type { Room, ActiveUser } from '@/entities/room'
 import type { Listener } from '@/entities/listener'
 import { firebaseDatabase } from '@/utils/firebase'
-import { ref, onValue, off } from 'firebase/database'
+import { ref, onValue, off, get } from 'firebase/database'
 
 export const listenRooms = (setRooms: (rooms: Room[]) => void): Listener => {
   const roomsReference = ref(firebaseDatabase, 'available_rooms')
@@ -53,4 +53,17 @@ export const listenActiveUsers = (
       }),
     off: () => off(roomsReference)
   }
+}
+
+const getPublicRoomsLength = async (): Promise<number> => {
+  let roomsLength = 0
+  const availableRoomsReference = ref(firebaseDatabase, 'available_rooms')
+  await get(availableRoomsReference).then(snapshot => {
+    if (snapshot.hasChildren()) {
+      snapshot.forEach(() => {
+        roomsLength += 1
+      })
+    }
+  })
+  return roomsLength
 }
