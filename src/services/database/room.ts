@@ -32,3 +32,25 @@ export const listenRooms = (setRooms: (rooms: Room[]) => void): Listener => {
     off: () => off(roomsReference)
   }
 }
+
+export const listenActiveUsers = (
+  roomId: string,
+  setUserCounter: (userCounter: number) => void
+): Listener => {
+  const roomsReference = ref(firebaseDatabase, `available_rooms/${roomId}`)
+
+  return {
+    on: () =>
+      onValue(roomsReference, snapshot => {
+        let activeUsers: number = 0
+
+        if (snapshot.hasChild('active_users')) {
+          snapshot.child('active_users').forEach(() => {
+            activeUsers += 1
+          })
+        }
+        setUserCounter(activeUsers)
+      }),
+    off: () => off(roomsReference)
+  }
+}
