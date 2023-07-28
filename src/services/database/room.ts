@@ -156,3 +156,13 @@ export const handleRoomChange = async (
   }
   await addUserInRoom(newRoom.id, userId, isPrivateRoom)
 }
+
+export const setPrivateRoom = async (userId: string): Promise<Room> => {
+  const roomId = generateId(4).toUpperCase()
+  const privateRoom: Room = {
+    id: roomId,
+    name: roomId
+  }
+  await addUserInRoom(roomId, userId, true)
+  return privateRoom
+}
