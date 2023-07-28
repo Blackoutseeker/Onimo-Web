@@ -2,13 +2,13 @@ import { FC, useState, useEffect, memo } from 'react'
 import type { Room } from '@/entities/room'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
-import { listenRooms } from '@/services/database/room'
+import { listenRooms, getActiveUsers } from '@/services/database/room'
 import { setCurrentRoom } from '@/services/store/ducks/room'
 
 interface RoomItemProps {
   room: Room
   isCurrentRoom: boolean
-  changeRoom: (room: Room) => void
+  changeRoom: (room: Room) => Promise<void>
 }
 
 const RoomItem: FC<RoomItemProps> = ({ room, isCurrentRoom, changeRoom }) => {
@@ -49,8 +49,11 @@ const RoomsList: FC = () => {
     }
   }, [])
 
-  const changeRoom = (room: Room) => {
-    dispatch(setCurrentRoom(room))
+  const changeRoom = async (room: Room) => {
+    const activeUsers = await getActiveUsers(room.id)
+    if (activeUsers < 5) {
+      dispatch(setCurrentRoom(room))
+    }
   }
 
   const renderRoomItems = () =>
