@@ -1,6 +1,10 @@
 import { FC, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
-import { setPublicRoom, handleRoomChange } from '@/services/database/room'
+import {
+  setPublicRoom,
+  handleRoomChange,
+  setPrivateRoom
+} from '@/services/database/room'
 import { setCurrentRoom } from '@/services/store/ducks/room'
 import { AiOutlineInfoCircle, AiOutlinePlus } from 'react-icons/ai'
 import RoomsList from '../RoomsList'
@@ -22,6 +26,12 @@ const RoomsContainer: FC = () => {
       await handleRoomChange(currentRoom, publicRoom, user.id)
       dispatch(setCurrentRoom(publicRoom))
     }
+  }
+
+  const createPrivateRoom = async () => {
+    const privateRoom = await setPrivateRoom(user.id)
+    await handleRoomChange(currentRoom, privateRoom, user.id, true)
+    dispatch(setCurrentRoom(privateRoom))
   }
 
   return (
@@ -53,7 +63,10 @@ const RoomsContainer: FC = () => {
           </div>
           <h4 className="text-left font-bold text-white">Criar sala pública</h4>
         </button>
-        <button className="flex items-center space-x-5 px-10 py-5 duration-150 hover:bg-soft-dark">
+        <button
+          className="flex items-center space-x-5 px-10 py-5 duration-150 hover:bg-soft-dark"
+          onClick={createPrivateRoom}
+        >
           <div>
             <AiOutlinePlus className="text-white" size={20} />
           </div>
