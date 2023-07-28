@@ -57,7 +57,7 @@ const RoomsList: FC = () => {
   const changeRoom = async (room: Room) => {
     const activeUsers = await getActiveUsers(room.id)
     if (activeUsers < 5) {
-      await handleRoomChange(currentRoom.id, room.id, user.id)
+      await handleRoomChange(currentRoom, room, user.id)
       dispatch(setCurrentRoom(room))
     }
   }

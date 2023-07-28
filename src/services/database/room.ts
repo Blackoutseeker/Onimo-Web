@@ -145,13 +145,14 @@ const removeUserFromRoom = async (
 }
 
 export const handleRoomChange = async (
-  oldRoomId: string,
-  newRoomId: string,
+  oldRoom: Room,
+  newRoom: Room,
   userId: string,
   isPrivateRoom: boolean = false
 ) => {
-  if (oldRoomId !== '') {
-    await removeUserFromRoom(oldRoomId, userId, isPrivateRoom)
+  if (oldRoom.id !== '') {
+    const isPrivateRoom = oldRoom.id === oldRoom.name
+    await removeUserFromRoom(oldRoom.id, userId, isPrivateRoom)
   }
-  await addUserInRoom(newRoomId, userId, isPrivateRoom)
+  await addUserInRoom(newRoom.id, userId, isPrivateRoom)
 }

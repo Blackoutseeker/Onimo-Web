@@ -19,7 +19,7 @@ const RoomsContainer: FC = () => {
   const createPublicRoom = async () => {
     const publicRoom = await setPublicRoom()
     if (publicRoom) {
-      await handleRoomChange(currentRoom.id, publicRoom.id, user.id)
+      await handleRoomChange(currentRoom, publicRoom, user.id)
       dispatch(setCurrentRoom(publicRoom))
     }
   }
