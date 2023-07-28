@@ -5,8 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import {
   listenRooms,
   getActiveUsers,
-  removeUserFromRoom,
-  addUserInRoom
+  handleRoomChange
 } from '@/services/database/room'
 import { setCurrentRoom } from '@/services/store/ducks/room'
 
@@ -58,11 +57,8 @@ const RoomsList: FC = () => {
   const changeRoom = async (room: Room) => {
     const activeUsers = await getActiveUsers(room.id)
     if (activeUsers < 5) {
-      if (currentRoom.id !== '') {
-        await removeUserFromRoom(currentRoom.id, user.id)
-      }
+      await handleRoomChange(currentRoom.id, room.id, user.id)
       dispatch(setCurrentRoom(room))
-      await addUserInRoom(room.id, user.id)
     }
   }
 
