@@ -170,3 +170,10 @@ export const setPrivateRoom = async (userId: string): Promise<Room> => {
   await addUserInRoom(roomId, userId, true)
   return privateRoom
 }
+
+export const checkIfPrivateRoomExists = async (
+  roomId: string
+): Promise<boolean> => {
+  const privateRoomReference = ref(firebaseDatabase, `chat_rooms/${roomId}`)
+  return (await get(privateRoomReference)).exists()
+}
