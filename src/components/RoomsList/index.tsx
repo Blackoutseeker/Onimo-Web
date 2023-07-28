@@ -2,7 +2,12 @@ import { FC, useState, useEffect, memo } from 'react'
 import type { Room } from '@/entities/room'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
-import { listenRooms, getActiveUsers } from '@/services/database/room'
+import {
+  listenRooms,
+  getActiveUsers,
+  removeUserFromRoom,
+  addUserInRoom
+} from '@/services/database/room'
 import { setCurrentRoom } from '@/services/store/ducks/room'
 
 interface RoomItemProps {
@@ -39,6 +44,7 @@ const RoomItemMemoized = memo(RoomItem)
 const RoomsList: FC = () => {
   const dispatch = useAppDispatch()
   const currentRoom = useAppSelector(state => state.room)
+  const user = useAppSelector(state => state.user)
   const [rooms, setRooms] = useState<Room[]>([])
 
   useEffect(() => {
@@ -52,7 +58,11 @@ const RoomsList: FC = () => {
   const changeRoom = async (room: Room) => {
     const activeUsers = await getActiveUsers(room.id)
     if (activeUsers < 5) {
+      if (currentRoom.id !== '') {
+        await removeUserFromRoom(currentRoom.id, user.id)
+      }
       dispatch(setCurrentRoom(room))
+      await addUserInRoom(room.id, user.id)
     }
   }
 
