@@ -1,6 +1,6 @@
 import { FC, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
-import { setPublicRoom } from '@/services/database/room'
+import { setPublicRoom, handleRoomChange } from '@/services/database/room'
 import { setCurrentRoom } from '@/services/store/ducks/room'
 import { AiOutlineInfoCircle, AiOutlinePlus } from 'react-icons/ai'
 import RoomsList from '../RoomsList'
@@ -8,6 +8,7 @@ import InfoModal from '../InfoModal'
 
 const RoomsContainer: FC = () => {
   const dispatch = useAppDispatch()
+  const currentRoom = useAppSelector(state => state.room)
   const user = useAppSelector(state => state.user)
   const modalReference = useRef<HTMLDialogElement>(null)
 
@@ -18,6 +19,7 @@ const RoomsContainer: FC = () => {
   const createPublicRoom = async () => {
     const publicRoom = await setPublicRoom()
     if (publicRoom) {
+      await handleRoomChange(currentRoom.id, publicRoom.id, user.id)
       dispatch(setCurrentRoom(publicRoom))
     }
   }
