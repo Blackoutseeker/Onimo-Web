@@ -85,3 +85,25 @@ export const setPublicRoom = async (): Promise<Room | undefined> => {
   }
   return undefined
 }
+
+export const getActiveUsers = async (
+  roomId: string,
+  isPrivateRoom: boolean = false
+): Promise<number> => {
+  let activeUsers = 0
+  let roomReference = ref(firebaseDatabase, `available_rooms/${roomId}`)
+
+  if (isPrivateRoom) {
+    roomReference = ref(firebaseDatabase, `chat_rooms/${roomId}`)
+  }
+
+  await get(roomReference).then(snapshot => {
+    if (snapshot.hasChild('active_users')) {
+      snapshot.child('active_users').forEach(() => {
+        activeUsers += 1
+      })
+    }
+  })
+
+  return activeUsers
+}
