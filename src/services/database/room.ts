@@ -1,7 +1,7 @@
 import type { Room, ActiveUser } from '@/entities/room'
 import type { Listener } from '@/entities/listener'
 import { firebaseDatabase } from '@/utils/firebase'
-import { ref, onValue, off, get, set } from 'firebase/database'
+import { ref, onValue, off, get, set, remove } from 'firebase/database'
 import { generateId } from '@/utils/generate'
 
 export const listenRooms = (setRooms: (rooms: Room[]) => void): Listener => {
@@ -124,4 +124,22 @@ export const addUserInRoom = async (
     )
   }
   await set(userReference, { status: 'connected' })
+}
+
+export const removeUserFromRoom = async (
+  roomId: string,
+  userId: string,
+  isPrivateRoom: boolean = false
+) => {
+  let userReference = ref(
+    firebaseDatabase,
+    `available_rooms/${roomId}/active_users/${userId}`
+  )
+  if (isPrivateRoom) {
+    userReference = ref(
+      firebaseDatabase,
+      `chat_rooms/${roomId}/active_users/${userId}`
+    )
+  }
+  await remove(userReference)
 }
