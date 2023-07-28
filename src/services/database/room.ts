@@ -108,7 +108,7 @@ export const getActiveUsers = async (
   return activeUsers
 }
 
-export const addUserInRoom = async (
+const addUserInRoom = async (
   roomId: string,
   userId: string,
   isPrivateRoom: boolean = false
@@ -126,7 +126,7 @@ export const addUserInRoom = async (
   await set(userReference, { status: 'connected' })
 }
 
-export const removeUserFromRoom = async (
+const removeUserFromRoom = async (
   roomId: string,
   userId: string,
   isPrivateRoom: boolean = false
@@ -142,4 +142,16 @@ export const removeUserFromRoom = async (
     )
   }
   await remove(userReference)
+}
+
+export const handleRoomChange = async (
+  oldRoomId: string,
+  newRoomId: string,
+  userId: string,
+  isPrivateRoom: boolean = false
+) => {
+  if (oldRoomId !== '') {
+    await removeUserFromRoom(oldRoomId, userId, isPrivateRoom)
+  }
+  await addUserInRoom(newRoomId, userId, isPrivateRoom)
 }
