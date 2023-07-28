@@ -62,7 +62,14 @@ export const UserCounter: FC = () => {
     }
   }, [currentRoom])
 
-  return <p className="text-sm text-white">{userCounter}/5</p>
+  const isPrivateRoom = currentRoom.id === currentRoom.name
+  const maximumNumberOfUsers: number = isPrivateRoom ? 10 : 5
+
+  return (
+    <p className="text-sm text-white">
+      {userCounter}/{maximumNumberOfUsers}
+    </p>
+  )
 }
 
 const Header: FC = () => {
