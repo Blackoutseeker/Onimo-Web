@@ -1,16 +1,37 @@
-import { FC, useState, FormEvent, ChangeEvent, useEffect } from 'react'
-import { useAppSelector } from '@/hooks/redux'
-import { listenActiveUsers } from '@/services/database/room'
+import { FC, useRef, useState, FormEvent, ChangeEvent, useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux'
+import type { Room } from '@/entities/room'
+import {
+  checkIfPrivateRoomExists,
+  handleRoomChange,
+  listenActiveUsers
+} from '@/services/database/room'
+import { setCurrentRoom } from '@/services/store/ducks/room'
 import { FaUser } from 'react-icons/fa'
 
 export const RoomInput: FC = () => {
+  const dispatch = useAppDispatch()
   const currentRoom = useAppSelector(state => state.room)
+  const user = useAppSelector(state => state.user)
+  const inputRef = useRef<HTMLInputElement>(null)
   const [roomName, setRoomName] = useState<string>('')
   const [editing, setEditing] = useState<boolean>(false)
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    setRoomName('')
+    if (roomName.length === 4) {
+      const privateRoom: Room = {
+        id: roomName.toUpperCase(),
+        name: roomName.toUpperCase()
+      }
+      const privateRoomExists = await checkIfPrivateRoomExists(privateRoom.id)
+      if (privateRoomExists) {
+        await handleRoomChange(currentRoom, privateRoom, user.id, true)
+        dispatch(setCurrentRoom(privateRoom))
+        inputRef.current?.blur()
+      }
+      setRoomName('')
+    }
   }
 
   const handleRoomNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +57,8 @@ export const RoomInput: FC = () => {
         onBlur={handleBlur}
         placeholder="Código da sala"
         title="Inserir código de sala privada"
+        ref={inputRef}
+        maxLength={4}
       />
     </form>
   )
