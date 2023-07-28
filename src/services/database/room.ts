@@ -36,13 +36,17 @@ export const listenRooms = (setRooms: (rooms: Room[]) => void): Listener => {
 
 export const listenActiveUsers = (
   roomId: string,
-  setUserCounter: (userCounter: number) => void
+  setUserCounter: (userCounter: number) => void,
+  isPrivateRoom: boolean = false
 ): Listener => {
-  const roomsReference = ref(firebaseDatabase, `available_rooms/${roomId}`)
+  let roomReference = ref(firebaseDatabase, `available_rooms/${roomId}`)
+  if (isPrivateRoom) {
+    roomReference = ref(firebaseDatabase, `chat_rooms/${roomId}`)
+  }
 
   return {
     on: () =>
-      onValue(roomsReference, snapshot => {
+      onValue(roomReference, snapshot => {
         let activeUsers: number = 0
 
         if (snapshot.hasChild('active_users')) {
@@ -52,7 +56,7 @@ export const listenActiveUsers = (
         }
         setUserCounter(activeUsers)
       }),
-    off: () => off(roomsReference)
+    off: () => off(roomReference)
   }
 }
 

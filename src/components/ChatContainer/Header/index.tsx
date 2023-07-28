@@ -49,16 +49,18 @@ export const UserCounter: FC = () => {
 
   useEffect(() => {
     if (currentRoom.id !== '') {
+      const isPrivateRoom = currentRoom.id === currentRoom.name
       const handleActiveUsersListener = listenActiveUsers(
         currentRoom.id,
-        setUserCounter
+        setUserCounter,
+        isPrivateRoom
       )
       handleActiveUsersListener.on()
       return () => {
         handleActiveUsersListener.off()
       }
     }
-  }, [currentRoom.id])
+  }, [currentRoom])
 
   return <p className="text-sm text-white">{userCounter}/5</p>
 }
