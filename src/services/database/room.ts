@@ -107,3 +107,21 @@ export const getActiveUsers = async (
 
   return activeUsers
 }
+
+export const addUserInRoom = async (
+  roomId: string,
+  userId: string,
+  isPrivateRoom: boolean = false
+) => {
+  let userReference = ref(
+    firebaseDatabase,
+    `available_rooms/${roomId}/active_users/${userId}`
+  )
+  if (isPrivateRoom) {
+    userReference = ref(
+      firebaseDatabase,
+      `chat_rooms/${roomId}/active_users/${userId}`
+    )
+  }
+  await set(userReference, { status: 'connected' })
+}
