@@ -1,3 +1,4 @@
+import { idRegex, generatedNicknameRegex } from '@/utils/constants'
 const endpoint = '/api/user'
 
 describe('Testing "user" API endpoint', () => {
@@ -11,6 +12,13 @@ describe('Testing "user" API endpoint', () => {
     cy.request('GET', endpoint).then(response => {
       expect(response.body).to.have.key('user')
       expect(response.body.user).to.have.keys('id', 'nickname')
+    })
+  })
+
+  it('Keys must respect their regex', () => {
+    cy.request('GET', endpoint).then(response => {
+      expect(response.body.user.id).to.match(idRegex)
+      expect(response.body.user.nickname).to.match(generatedNicknameRegex)
     })
   })
 })
