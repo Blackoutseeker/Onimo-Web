@@ -14,15 +14,19 @@ const Footer: FC = () => {
     setMessageBody(event.target.value)
   }
 
+  const roomIdIsEmpty = room.id === ''
+
   const submitMessage = async (event: FormEvent) => {
     event.preventDefault()
-    const message: Message = {
-      sender_id: user.id,
-      sender_nickname: user.nickname,
-      send_timestamp: formatSendTimestamp(new Date()),
-      body_text: messageBody
+    if (!roomIdIsEmpty) {
+      const message: Message = {
+        sender_id: user.id,
+        sender_nickname: user.nickname,
+        send_timestamp: formatSendTimestamp(new Date()),
+        body_text: messageBody
+      }
+      await setMessage(room.id, message)
     }
-    await setMessage(room.id, message)
     setMessageBody('')
   }
 
@@ -39,6 +43,7 @@ const Footer: FC = () => {
           onChange={handleMessageBodyChange}
           placeholder="Mensagem"
           maxLength={300}
+          disabled={roomIdIsEmpty}
         />
         {messageBody.length > 0 && (
           <p className="text-sm text-white">{messageBody.length}/300</p>
