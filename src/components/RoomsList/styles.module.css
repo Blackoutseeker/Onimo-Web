@@ -1,0 +1,7 @@
+.roomsList::-webkit-scrollbar {
+  @apply w-2 bg-soft-dark;
+}
+
+.roomsList::-webkit-scrollbar-thumb {
+  @apply bg-accent;
+}

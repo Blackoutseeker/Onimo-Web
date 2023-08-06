@@ -33,7 +33,7 @@ const Footer: FC = () => {
   return (
     <footer>
       <form
-        className="flex items-center space-x-5 px-10"
+        className="mb-5 flex items-center space-x-5 px-10 md:mb-0"
         onSubmit={submitMessage}
       >
         <input

@@ -1,12 +1,17 @@
-import type { FC } from 'react'
+import type { HTMLAttributes, FC } from 'react'
 import Header from './Header'
 import Chat from './Chat'
 import Footer from './Footer'
 
-const ChatContainer: FC = () => {
+interface ChatContainerProps {
+  className?: HTMLAttributes<HTMLDivElement>['className']
+  toggleView: () => void
+}
+
+const ChatContainer: FC<ChatContainerProps> = ({ className, toggleView }) => {
   return (
-    <div className="flex flex-1 flex-col space-y-5">
-      <Header />
+    <div className={`flex flex-grow flex-col space-y-5 ${className}`}>
+      <Header toggleView={toggleView} />
       <Chat />
       <Footer />
     </div>

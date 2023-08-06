@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react'
+import { HTMLAttributes, FC, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import {
   setPublicRoom,
@@ -10,7 +10,12 @@ import { AiOutlineInfoCircle, AiOutlinePlus } from 'react-icons/ai'
 import RoomsList from '../RoomsList'
 import InfoModal from '../InfoModal'
 
-const RoomsContainer: FC = () => {
+interface RoomsContainerProps {
+  className?: HTMLAttributes<HTMLDivElement>['className']
+  toggleView: () => void
+}
+
+const RoomsContainer: FC<RoomsContainerProps> = ({ className, toggleView }) => {
   const dispatch = useAppDispatch()
   const currentRoom = useAppSelector(state => state.room)
   const user = useAppSelector(state => state.user)
@@ -25,6 +30,7 @@ const RoomsContainer: FC = () => {
     if (publicRoom) {
       await handleRoomChange(currentRoom, publicRoom, user.id)
       dispatch(setCurrentRoom(publicRoom))
+      toggleView()
     }
   }
 
@@ -32,16 +38,17 @@ const RoomsContainer: FC = () => {
     const privateRoom = await setPrivateRoom(user.id)
     await handleRoomChange(currentRoom, privateRoom, user.id, true)
     dispatch(setCurrentRoom(privateRoom))
+    toggleView()
   }
 
   return (
     <>
       <div
-        className="flex h-screen w-full flex-col border-r-[1px] border-soft-dark
-        md:h-[calc(100vh-128px)] md:max-w-[300px]"
+        className={`flex h-screen w-full flex-col border-r-[1px] border-soft-dark
+        md:h-[calc(100vh-128px)] md:max-w-[300px] ${className}`}
       >
         <header
-          className="flex h-16 items-center justify-between 
+          className="flex min-h-[64px] items-center justify-between 
           border-b-[1px] border-soft-dark px-10"
         >
           <h3 className="text-xl font-bold text-white">{user.nickname}</h3>
@@ -73,7 +80,7 @@ const RoomsContainer: FC = () => {
           <h4 className="text-left font-bold text-white">Criar sala privada</h4>
         </button>
 
-        <RoomsList />
+        <RoomsList toggleView={toggleView} />
       </div>
       <InfoModal modalReference={modalReference} />
     </>
