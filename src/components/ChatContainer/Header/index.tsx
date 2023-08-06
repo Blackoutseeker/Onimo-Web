@@ -7,6 +7,7 @@ import {
   listenActiveUsers
 } from '@/services/database/room'
 import { setCurrentRoom } from '@/services/store/ducks/room'
+import { idRegex } from '@/utils/constants'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
 import { FaUser } from 'react-icons/fa'
 
@@ -60,6 +61,7 @@ export const RoomInput: FC = () => {
         title="Inserir código de sala privada"
         ref={inputRef}
         maxLength={4}
+        pattern={idRegex.source}
         data-cy="room-input"
       />
     </form>
