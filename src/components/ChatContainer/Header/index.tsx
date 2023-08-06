@@ -60,6 +60,7 @@ export const RoomInput: FC = () => {
         title="Inserir código de sala privada"
         ref={inputRef}
         maxLength={4}
+        data-cy="room-input"
       />
     </form>
   )

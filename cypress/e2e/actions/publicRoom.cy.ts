@@ -14,4 +14,14 @@ describe('Testing public room actions', () => {
       }
     })
   })
+
+  it('Must enter a public room', () => {
+    cy.getElementByDataCy('rooms-list').then(element => {
+      const elementsLength = Cypress.$(element).children().length
+      const randomRoom = Math.floor(Math.random() * elementsLength) + 1
+      const room = `Sala ${randomRoom}`
+      cy.get('li').contains(room).click()
+      cy.getElementByDataCy('room-input').should('have.value', room)
+    })
+  })
 })
