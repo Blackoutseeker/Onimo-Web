@@ -44,6 +44,7 @@ const Footer: FC = () => {
           placeholder="Mensagem"
           maxLength={300}
           disabled={roomIdIsEmpty}
+          data-cy="message-input"
         />
         {messageBody.length > 0 && (
           <p className="text-sm text-white">{messageBody.length}/300</p>
