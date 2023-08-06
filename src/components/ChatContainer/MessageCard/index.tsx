@@ -13,30 +13,24 @@ const MessageCard: FC<MessageCardProps> = ({
 }) => {
   const formattedTime = formatTime(message.send_timestamp)
 
-  if (isMessageFromCurrentUser) {
-    return (
-      <li className="flex justify-end">
-        <div
-          className="ml-20 flex w-fit min-w-[340px] flex-col space-y-[14px] rounded-lg
-          rounded-tr-none bg-soft-dark p-[14px] text-sm text-white"
-        >
-          <p>{message.body_text}</p>
-          <p className="text-end">{formattedTime}</p>
-        </div>
-      </li>
-    )
-  }
-
   return (
-    <li
-      className="mr-20 flex w-fit min-w-[340px] flex-col space-y-[14px] rounded-lg
-      rounded-tl-none border-2 border-soft-dark p-[14px] text-sm text-soft-gray"
-    >
-      <h2 className="text-base font-bold text-white">
-        {message.sender_nickname}
-      </h2>
-      <p>{message.body_text}</p>
-      <p className="text-end">{formattedTime}</p>
+    <li className={`flex ${isMessageFromCurrentUser ? 'justify-end' : ''}`}>
+      <div
+        className={`${isMessageFromCurrentUser ? 'ml-10' : 'mr-10'}
+        ${isMessageFromCurrentUser ? 'md:ml-20' : 'md:mr-20'}
+        ${isMessageFromCurrentUser && 'bg-soft-dark text-white'}
+        ${isMessageFromCurrentUser ? 'rounded-tr-none' : 'rounded-tl-none'}
+        flex w-fit min-w-[180px] flex-col space-y-[14px] rounded-lg border-2
+        border-soft-dark p-[14px] text-sm text-soft-gray md:min-w-[340px]`}
+      >
+        {!isMessageFromCurrentUser && (
+          <h2 className="text-base font-bold text-white">
+            {message.sender_nickname}
+          </h2>
+        )}
+        <p>{message.body_text}</p>
+        <p className="text-end">{formattedTime}</p>
+      </div>
     </li>
   )
 }

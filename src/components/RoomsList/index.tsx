@@ -1,3 +1,4 @@
+import styles from './styles.module.css'
 import { FC, useState, useEffect, memo } from 'react'
 import type { Room } from '@/entities/room'
 import { BsFillPersonFill } from 'react-icons/bs'
@@ -40,7 +41,11 @@ const RoomItem: FC<RoomItemProps> = ({ room, isCurrentRoom, changeRoom }) => {
 
 const RoomItemMemoized = memo(RoomItem)
 
-const RoomsList: FC = () => {
+interface RoomsListProps {
+  toggleView: () => void
+}
+
+const RoomsList: FC<RoomsListProps> = ({ toggleView }) => {
   const dispatch = useAppDispatch()
   const currentRoom = useAppSelector(state => state.room)
   const user = useAppSelector(state => state.user)
@@ -59,6 +64,7 @@ const RoomsList: FC = () => {
     if (activeUsers < 5) {
       await handleRoomChange(currentRoom, room, user.id)
       dispatch(setCurrentRoom(room))
+      toggleView()
     }
   }
 
@@ -82,7 +88,11 @@ const RoomsList: FC = () => {
       </div>
     )
 
-  return <ol className="max-h-full overflow-y-auto">{renderRoomItems()}</ol>
+  return (
+    <ol className={`max-h-full overflow-y-auto ${styles.roomsList}`}>
+      {renderRoomItems()}
+    </ol>
+  )
 }
 
 export default RoomsList

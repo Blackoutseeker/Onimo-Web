@@ -45,9 +45,8 @@ const Chat: FC = () => {
 
   return (
     <ol
-      id="chat-list"
-      className={`flex max-h-[calc(100dvh-284px)] flex-grow flex-col
-      space-y-5 overflow-y-auto scroll-smooth px-10 ${styles.chatList}`}
+      className={`flex h-[calc(100vh-176px)] flex-grow flex-col space-y-5 overflow-y-auto scroll-smooth
+      px-10 md:max-h-[calc(100dvh-284px)] ${styles.chatList}`}
       ref={chatListRef}
     >
       {renderMessages()}

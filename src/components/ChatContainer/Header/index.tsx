@@ -7,6 +7,7 @@ import {
   listenActiveUsers
 } from '@/services/database/room'
 import { setCurrentRoom } from '@/services/store/ducks/room'
+import { HiOutlineArrowLeft } from 'react-icons/hi'
 import { FaUser } from 'react-icons/fa'
 
 export const RoomInput: FC = () => {
@@ -95,9 +96,20 @@ export const UserCounter: FC = () => {
   )
 }
 
-const Header: FC = () => {
+interface HeaderProps {
+  toggleView: () => void
+}
+
+const Header: FC<HeaderProps> = ({ toggleView }) => {
   return (
     <header className="flex h-16 items-center space-x-5 border-b-[1px] border-soft-dark px-10">
+      <button
+        className="h-full pr-5 md:hidden"
+        aria-label="Voltar para listagem de salas"
+        onClick={toggleView}
+      >
+        <HiOutlineArrowLeft className="text-white" size={20} />
+      </button>
       <RoomInput />
       <UserCounter />
       <FaUser className="text-white" size={16} />
