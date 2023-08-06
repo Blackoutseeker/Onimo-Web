@@ -11,16 +11,22 @@ import {
 import { setCurrentRoom } from '@/services/store/ducks/room'
 
 interface RoomItemProps {
+  index: number
   room: Room
   isCurrentRoom: boolean
   changeRoom: (room: Room) => Promise<void>
 }
 
-const RoomItem: FC<RoomItemProps> = ({ room, isCurrentRoom, changeRoom }) => {
+const RoomItem: FC<RoomItemProps> = ({
+  index,
+  room,
+  isCurrentRoom,
+  changeRoom
+}) => {
   const handleChangeRoom = () => changeRoom(room)
 
   return (
-    <li>
+    <li data-cy={`public-room-${index}`}>
       <button
         className={`flex w-full items-center space-x-5 px-10 py-5 duration-150 hover:bg-soft-dark ${
           isCurrentRoom ? 'bg-soft-dark' : 'bg-transparent'
@@ -69,9 +75,10 @@ const RoomsList: FC<RoomsListProps> = ({ toggleView }) => {
   }
 
   const renderRoomItems = () =>
-    rooms.map(room => (
+    rooms.map((room, index) => (
       <RoomItemMemoized
         key={room.id}
+        index={index + 1}
         room={room}
         isCurrentRoom={currentRoom.id === room.id}
         changeRoom={changeRoom}
@@ -89,7 +96,10 @@ const RoomsList: FC<RoomsListProps> = ({ toggleView }) => {
     )
 
   return (
-    <ol className={`max-h-full overflow-y-auto ${styles.roomsList}`}>
+    <ol
+      className={`max-h-full overflow-y-auto ${styles.roomsList}`}
+      data-cy="rooms-list"
+    >
       {renderRoomItems()}
     </ol>
   )
