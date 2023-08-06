@@ -21,8 +21,8 @@ if (firebaseAppIsNotInitialized) {
 
 export const initializeFirebaseAppCheck = () => {
   if (process.env.NODE_ENV !== 'production' || process.env.IS_TESTING_FROM_CI) {
-    self.FIREBASE_APP_CHECK_DEBUG_TOKEN =
-      process.env.FIREBASE_APP_CHECK_DEBUG_TOKEN
+    self.FIREBASE_APPCHECK_DEBUG_TOKEN =
+      process.env.FIREBASE_APPCHECK_DEBUG_TOKEN
   }
 
   initializeAppCheck(getApp(), {

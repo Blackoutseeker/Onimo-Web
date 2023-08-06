@@ -9,7 +9,7 @@ export declare global {
       FIREBASE_MESSAGING_SENDER_ID: string
       FIREBASE_APP_ID: string
       FIREBASE_MEASUREMENT_ID: string
-      FIREBASE_APP_CHECK_DEBUG_TOKEN: string
+      FIREBASE_APPCHECK_DEBUG_TOKEN: string
 
       RECAPTCHA_SITE_KEY: string
 
@@ -20,6 +20,6 @@ export declare global {
   }
 
   interface Window {
-    FIREBASE_APP_CHECK_DEBUG_TOKEN: string | undefined
+    FIREBASE_APPCHECK_DEBUG_TOKEN: string | undefined
   }
 }
