@@ -18,7 +18,10 @@ const nextConfig = {
 
     IS_TESTING_FROM_CI: process.env.IS_TESTING_FROM_CI,
 
-    JWT_SECRET_KEY: process.env.JWT_SECRET_KEY
+    JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
+
+    CRON_SECRET: process.env.CRON_SECRET,
+    CRON_SECRET_TEST: process.env.CRON_SECRET_TEST
   }
 }
 
