@@ -10,6 +10,8 @@ export declare global {
       FIREBASE_APP_ID: string
       FIREBASE_MEASUREMENT_ID: string
       FIREBASE_APPCHECK_DEBUG_TOKEN: string
+      FIREBASE_PRIVATE_KEY: string
+      FIREBASE_CLIENT_EMAIL: string
 
       RECAPTCHA_SITE_KEY: string
 
