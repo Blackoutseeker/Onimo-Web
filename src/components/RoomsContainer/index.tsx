@@ -63,7 +63,7 @@ const RoomsContainer: FC<RoomsContainerProps> = ({ className, toggleView }) => {
 
         <button
           className="flex items-center space-x-5 px-10 py-5 duration-150 hover:bg-soft-dark"
-          data-cy="crate-public-room-button"
+          data-cy="create-public-room-button"
           onClick={createPublicRoom}
         >
           <div>
@@ -73,6 +73,7 @@ const RoomsContainer: FC<RoomsContainerProps> = ({ className, toggleView }) => {
         </button>
         <button
           className="flex items-center space-x-5 px-10 py-5 duration-150 hover:bg-soft-dark"
+          data-cy="create-private-room-button"
           onClick={createPrivateRoom}
         >
           <div>
