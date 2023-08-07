@@ -18,6 +18,9 @@ export declare global {
       IS_TESTING_FROM_CI: boolean
 
       JWT_SECRET_KEY: string
+
+      CRON_SECRET: string
+      CRON_SECRET_TEST: string | undefined
     }
   }
 
