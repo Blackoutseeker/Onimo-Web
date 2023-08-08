@@ -1,0 +1,34 @@
+name: Run e2e Cypress tests
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup environment variables in .env.local file
+        run: |
+          touch .env.local
+          echo "${{ secrets.ENV_FILE }}" >> .env.local
+
+      - name: Setup Cypress environment variables in cypress.env.json file
+        run: |
+          touch cypress.env.json
+          echo "${{ secrets.CYPRESS_ENV }}" >> cypress.env.json
+
+      - name: Run e2e Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          build: npm run build
+          start: npm start
