@@ -30,10 +30,6 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Onimo</title>
-        <meta
-          name="description"
-          content="Onimo é um chat anônimo, onde você pode criar salas de chat públicas ou privadas."
-        />
       </Head>
       <main className="flex min-h-screen items-center justify-center">
         <div className="flex w-full lg:w-3/5">
