@@ -1,34 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Onimo-Web
 
-## Getting Started
+<p align="center">
 
-First, run the development server:
+<img src="https://user-images.githubusercontent.com/56811005/227769214-d0b46dde-137a-40a7-bced-ab3b43e98bc6.png" height="200">
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+</p>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![version](https://img.shields.io/badge/Version-1.0.0-121212)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Description
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Onimo is an anonymous private chat. It allows you to create public and private chat rooms.
 
-## Learn More
+<br>
 
-To learn more about Next.js, take a look at the following resources:
+> **Note**: Also download the Onimo app for Android mobile devices. Click [here](https://github.com/Blackoutseeker/Onimo-Flutter) to learn more about **Onimo mobile app**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<br>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Development environment
 
-## Deploy on Vercel
+### Code editor
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<img src="https://github.com/bbrtbr/OPMundi/assets/56811005/e50acc41-88fb-4246-952d-4c21e477beb7" width="170" />
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<br>
+
+### Technologies
+
+<img src="https://github.com/bbrtbr/OPMundi/assets/56811005/c118083c-dc9f-4c03-9f50-dd46ad389c01" width="400" >
+
+<br>
+
+### Test frameworks
+
+<img src="https://github.com/bbrtbr/OPMundi/assets/56811005/d686af5e-5c54-4a71-b81f-631662d246a6" width="200" >
+
+<br>
+
+### Linting and code formatter
+
+<img src="https://github.com/bbrtbr/OPMundi/assets/56811005/36798457-3679-4abc-a3cb-26078edb9694" width="200" >
+
+<br>
+
+### Package Managers
+
+<img src="https://github.com/bbrtbr/OPMundi/assets/56811005/f2b8736f-3a1d-4eb0-bdf8-66ff04a39de6" width="80" >
+
+<br>
+
+### Version control systems
+
+<img src="https://github.com/bbrtbr/OPMundi/assets/56811005/1f84e0c0-08bd-431d-a8da-411e96f17e42" width="200" >
+
+> © 2023 Felipe Pereira. All rights reserved
