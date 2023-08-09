@@ -30,5 +30,5 @@ export const middleware = async (request: NextRequest) => {
 }
 
 export const config = {
-  matcher: ['/api/:function*']
+  matcher: ['/api/user']
 }

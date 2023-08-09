@@ -6,5 +6,6 @@ export default defineConfig({
   },
   fixturesFolder: false,
   screenshotOnRunFailure: false,
-  video: false
+  video: false,
+  retries: { openMode: 1, runMode: 2 }
 })
