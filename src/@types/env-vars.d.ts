@@ -24,6 +24,8 @@ export declare global {
 
       MESSAGE_BEARER_KEY: string
       TEST_MESSAGE_BEARER_KEY: string | undefined
+
+      PRODUCTION_REFERER: string
     }
   }
 
