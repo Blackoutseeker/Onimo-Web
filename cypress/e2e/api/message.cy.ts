@@ -6,7 +6,9 @@ const endpoint = '/api/message'
 const fakeUser = generateUser()
 
 describe('Testing "message" API endpoint', () => {
-  it('Response status must be 200', () => {
+  const messageBearerKey = Cypress.env('TEST_MESSAGE_BEARER_KEY')
+
+  it('Response status must be 200 if everything is correct', () => {
     const message = {
       senderId: fakeUser.id,
       senderNickname: fakeUser.nickname,
@@ -20,12 +22,27 @@ describe('Testing "message" API endpoint', () => {
       url: endpoint,
       body: JSON.stringify({ ...message, roomId }),
       headers: {
-        Authorization: `Bearer ${Cypress.env('TEST_MESSAGE_BEARER_KEY')}`,
+        Authorization: `Bearer ${messageBearerKey}`,
         'Content-Type': 'application/json'
       }
     }).then(response => {
       expect(response.status).to.equal(200)
       expect(response.body.message).to.equal('OK')
     })
+  })
+
+  it('Response status must be 405 for methods other than "POST"', () => {
+    const disallowedMethods = ['GET', 'PUT', 'PATCH', 'DELETE']
+
+    for (const method of disallowedMethods) {
+      cy.request({
+        method,
+        url: endpoint,
+        failOnStatusCode: false
+      }).then(response => {
+        expect(response.status).to.equal(405)
+        expect(response.body.message).to.equal('Method not allowed')
+      })
+    }
   })
 })
