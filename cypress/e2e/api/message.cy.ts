@@ -56,4 +56,18 @@ describe('Testing "message" API endpoint', () => {
       expect(response.body.message).to.equal('Unauthorized access')
     })
   })
+
+  it('Response status must be 400 if there are missing queries', () => {
+    cy.request({
+      method: 'POST',
+      url: endpoint,
+      failOnStatusCode: false,
+      headers: {
+        Authorization: `Bearer ${messageBearerKey}`
+      }
+    }).then(response => {
+      expect(response.status).to.equal(400)
+      expect(response.body.message).to.equal('Missing queries')
+    })
+  })
 })
