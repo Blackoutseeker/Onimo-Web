@@ -45,4 +45,15 @@ describe('Testing "message" API endpoint', () => {
       })
     }
   })
+
+  it('Response status must be 403 if not authorized', () => {
+    cy.request({
+      method: 'POST',
+      url: endpoint,
+      failOnStatusCode: false
+    }).then(response => {
+      expect(response.status).to.equal(403)
+      expect(response.body.message).to.equal('Unauthorized access')
+    })
+  })
 })
