@@ -3,6 +3,7 @@ import {
   information,
   nicknames,
   badWords,
+  httpMethods,
   nicknameRegex
 } from '@/utils/constants'
 
@@ -34,6 +35,7 @@ describe('Constants', () => {
     expect(information.length).toBeGreaterThan(0)
     expect(nicknames.length).toBeGreaterThan(0)
     expect(badWords.length).toBeGreaterThan(0)
+    expect(httpMethods.length).toBeGreaterThan(0)
   })
 
   test('Constants must not be duplicated', () => {
@@ -41,6 +43,7 @@ describe('Constants', () => {
     expect(checkDuplication(information)).toBeFalsy()
     expect(checkDuplication(nicknames)).toBeFalsy()
     expect(checkDuplication(badWords)).toBeFalsy()
+    expect(checkDuplication(httpMethods)).toBeFalsy()
   })
 
   test(`Nicknames must respect the ${nicknameRegex.source} regex`, () => {
