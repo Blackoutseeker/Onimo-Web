@@ -1,6 +1,7 @@
 import { generateUser, generateId } from '@/utils/generate'
 import { formatSendTimestamp } from '@/utils/format'
 import { faker } from '@faker-js/faker'
+import { httpMethods } from '@/utils/constants'
 
 const endpoint = '/api/message'
 const fakeUser = generateUser()
@@ -32,7 +33,7 @@ describe('Testing "message" API endpoint', () => {
   })
 
   it('Response status must be 405 for methods other than "POST"', () => {
-    const disallowedMethods = ['GET', 'PUT', 'PATCH', 'DELETE']
+    const disallowedMethods = httpMethods.filter(method => method !== 'POST')
 
     for (const method of disallowedMethods) {
       cy.request({
