@@ -147,3 +147,4 @@ export const badWords: string[] = [
 ]
 
 export const badWordsFilter = new Filter({ list: badWords })
+export const httpMethods: string[] = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
