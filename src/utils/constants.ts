@@ -1,3 +1,5 @@
+import Filter from 'bad-words'
+
 export const rules: string[] = [
   'Preste respeito a todos os usuários.',
   'Não revele sua verdadeira identidade.',
@@ -143,3 +145,5 @@ export const badWords: string[] = [
   'vagabundo',
   'viado'
 ]
+
+export const badWordsFilter = new Filter({ list: badWords })
