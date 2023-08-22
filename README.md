@@ -6,7 +6,7 @@
 
 </p>
 
-![version](https://img.shields.io/badge/Version-1.0.0+2-121212)
+![version](https://img.shields.io/badge/Version-1.1.0-121212)
 
 ## Description
 
