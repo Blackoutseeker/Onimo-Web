@@ -1,4 +1,4 @@
-import { idRegex, generatedNicknameRegex } from '@/utils/constants'
+import { idRegex, generatedNicknameRegex, httpMethods } from '@/utils/constants'
 const endpoint = '/api/user'
 
 describe('Testing "user" API endpoint', () => {
@@ -20,5 +20,22 @@ describe('Testing "user" API endpoint', () => {
       expect(response.body.user.id).to.match(idRegex)
       expect(response.body.user.nickname).to.match(generatedNicknameRegex)
     })
+  })
+
+  it('Response status must be 405 for methods other than "GET"', () => {
+    const disallowedMethods = httpMethods.filter(
+      method => method !== 'GET' && method !== 'DELETE'
+    )
+
+    for (const method of disallowedMethods) {
+      cy.request({
+        method,
+        url: endpoint,
+        failOnStatusCode: false
+      }).then(response => {
+        expect(response.status).to.equal(405)
+        expect(response.body.message).to.equal('Method not allowed')
+      })
+    }
   })
 })
