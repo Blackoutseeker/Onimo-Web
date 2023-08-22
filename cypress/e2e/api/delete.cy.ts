@@ -27,4 +27,15 @@ describe('Testing "delete" API endpoint', () => {
       })
     }
   })
+
+  it('Response status must be 401 if not authorized', () => {
+    cy.request({
+      method: 'GET',
+      url: endpoint,
+      failOnStatusCode: false
+    }).then(response => {
+      expect(response.status).to.equal(401)
+      expect(response.body.message).to.equal('Unauthorized access')
+    })
+  })
 })
