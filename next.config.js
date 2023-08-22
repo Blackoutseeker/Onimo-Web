@@ -21,7 +21,12 @@ const nextConfig = {
     JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
 
     CRON_SECRET: process.env.CRON_SECRET,
-    CRON_SECRET_TEST: process.env.CRON_SECRET_TEST
+    CRON_SECRET_TEST: process.env.CRON_SECRET_TEST,
+
+    MESSAGE_BEARER_KEY: process.env.MESSAGE_BEARER_KEY,
+    TEST_MESSAGE_BEARER_KEY: process.env.TEST_MESSAGE_BEARER_KEY,
+
+    PRODUCTION_REFERER: process.env.PRODUCTION_REFERER
   }
 }
 

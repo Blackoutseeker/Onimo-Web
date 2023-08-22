@@ -1,8 +1,6 @@
 import { FC, useState, ChangeEvent, FormEvent } from 'react'
 import { useAppSelector } from '@/hooks/redux'
-import type { Message } from '@/entities/message'
 import { formatSendTimestamp } from '@/utils/format'
-import { setMessage } from '@/services/database/message'
 import { MdSend } from 'react-icons/md'
 
 const Footer: FC = () => {
@@ -19,13 +17,21 @@ const Footer: FC = () => {
   const submitMessage = async (event: FormEvent) => {
     event.preventDefault()
     if (!roomIdIsEmpty) {
-      const message: Message = {
-        sender_id: user.id,
-        sender_nickname: user.nickname,
-        send_timestamp: formatSendTimestamp(new Date()),
-        body_text: messageBody
+      const message = {
+        senderId: user.id,
+        senderNickname: user.nickname,
+        sendTimestamp: formatSendTimestamp(new Date()),
+        bodyText: messageBody
       }
-      await setMessage(room.id, message)
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ ...message, roomId: room.id })
+      }
+
+      await fetch('/api/valid-referer', requestOptions)
     }
     setMessageBody('')
   }

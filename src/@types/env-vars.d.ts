@@ -21,6 +21,11 @@ export declare global {
 
       CRON_SECRET: string
       CRON_SECRET_TEST: string | undefined
+
+      MESSAGE_BEARER_KEY: string
+      TEST_MESSAGE_BEARER_KEY: string | undefined
+
+      PRODUCTION_REFERER: string
     }
   }
 
