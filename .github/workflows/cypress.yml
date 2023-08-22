@@ -26,7 +26,8 @@ jobs:
         run: |
           touch cypress.env.json
           echo { >> cypress.env.json
-          echo "  \"CRON_SECRET_TEST\": \"${{ secrets.CYPRESS_ENV }}\"" >> cypress.env.json
+          echo "  \"CRON_SECRET_TEST\": \"${{ secrets.CY_CRON_SECRET }}\"," >> cypress.env.json
+          echo "  \"TEST_MESSAGE_BEARER_KEY\": \"${{ secrets.CY_MESSAGE_BEARER_KEY }}\"" >> cypress.env.json
           echo } >> cypress.env.json
 
       - name: Run e2e Cypress tests
